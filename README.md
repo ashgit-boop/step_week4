@@ -3,7 +3,9 @@ STEP_WEEK4_HomeWork
 
 ## HomeWork1 (Wikipedia.py)
 ### Objective:
-Return the shortest path from the start to the goal in Wikipedia. If the start and the goal is not connected, return "Not_found".
+Return the shortest path from the given start to the goal in Wikipedia. If the start and the goal are not connected, return "Not_found".<br>
+
+
 ### Function:
   - def find_shortest_path (self, start, goal) : Find and return the shortest path from the start to the goal in Wikipedia.
       - Using BFS.
@@ -23,10 +25,10 @@ Return 10 pages that have the highest page ranks in wikipedia. (The most poplula
 ### Function:
   - def find_most_popular_pages(self) : Find the most popular pages in Wikipedia and return the pages.
     - Set all of the nodes' rank 1.0.
-    - If the node has links, distribute 85% of the ranks to them evenly, and 15% to the whole.
-    - If the node doesn't have any link, distribute the rank to the whole evenly. (Random Surfer)
+    - If the node has links, distribute 85% of the rank value to them evenly, and 15% to the whole.
+    - If the node doesn't have any link, distribute the rank value to the whole evenly. (Random Surfer)
     - Update each value.
-    - Repeat this flow until the whole average of difference between values before and after the update falls below 0.01.
+    - Repeat this flow until the whole average of difference between rank values before and after the update falls below 0.01.
       
 ### Variables:
   - rank_dic = defaultdict(list) : Store ranks of each ID as follows : {..., id:[old_rank , new_rank], ...}
@@ -34,6 +36,9 @@ Return 10 pages that have the highest page ranks in wikipedia. (The most poplula
   - total_dif : ave = total_dif / len(self.links). Initially set 0.
   - distribute_whole : Total value to distribute to the whole.
   - top_titles = [] : Store 10 answer titles.
-
-
+### What I thought:
+  - When distribute the rank value to the whole, the value is calculated as follows: distribute_whole / len(self.links) . This is because an error of the distribution value becomes smaller compared to when calculate it in each node as follows: old_rank*0.85 / len(self.links), and distribute to the whole. 
+Also, nested loop is avoided.
+  - To check whether there is a problem with the code, "assert total == len(self.links)" can be used. However, "total" is a sum of new_rank, so the value is floats, while len(self.links) is an integer. Therefore, "total == len(self.links)" cannot hold true. So "abs(assert total - len(self.links) )< 0.0000001", for example, may be better.
+  - While waiting for the result, you might be anxious, wondering that this code is correctly working. So this code prints logs or what is being executed.
 
